@@ -39,19 +39,18 @@ const useStyles = makeStyles({
   },
 })
 
-const Post = () => {
+const Post = ({ post }) => {
   const classes = useStyles()
   const url =
+    post.picture ||
     'https://images.pexels.com/photos/2148217/pexels-photo-2148217.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
   return (
     <Box className={classes.container}>
       <img className={classes.image} src={url} alt="wrapper" />
-      <Typography className={classes.text}>Music</Typography>
-      <Typography className={classes.heading}>Digital Diary</Typography>
-      <Typography className={classes.text}>Author: Prajwal Singla</Typography>
-      <Typography className={classes.detail}>
-        Hello from Prajwal Singla
-      </Typography>
+      <Typography className={classes.text}>{post.categories}</Typography>
+      <Typography className={classes.heading}>{post.title}</Typography>
+      <Typography className={classes.text}>Author: {post.username}</Typography>
+      <Typography className={classes.detail}>{post.description}</Typography>
     </Box>
   )
 }

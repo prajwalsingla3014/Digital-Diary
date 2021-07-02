@@ -2,8 +2,9 @@
 
 import { Box, makeStyles, Typography } from '@material-ui/core'
 import { Edit, Delete } from '@material-ui/icons'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { getPost, deletePost } from '../../service/api'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -40,35 +41,60 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
+  link: {
+    textDecoration: 'none',
+    color: 'inherit',
+  },
 }))
 
-const DetailView = () => {
+const DetailView = ({ match }) => {
   const classes = useStyles()
+  const history = useHistory()
   const url =
     'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'
+
+  const [post, setPost] = useState({})
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await getPost(match.params.id)
+      console.log(data)
+
+      setPost(data)
+    }
+    fetchData()
+  }, [match])
+
+  const deleteBlog = async () => {
+    await deletePost(post._id)
+    history.push('/')
+  }
+
   return (
     <Box className={classes.container}>
-      <img className={classes.image} src={url} alt="banner" />
+      <img className={classes.image} src={post.picture || url} alt="banner" />
       <Box className={classes.icons}>
-        <Link to="/update">
+        <Link to={`/update/${post._id}`}>
           <Edit className={classes.icon} color="primary" />
         </Link>
-        <Delete className={classes.icon} color="error" />
+        <Delete
+          onClick={() => deleteBlog()}
+          className={classes.icon}
+          color="error"
+        />
       </Box>
-      <Typography className={classes.heading}>Title of the Blog</Typography>
+      <Typography className={classes.heading}>{post.title}</Typography>
       <Box className={classes.subheading}>
-        <Typography>
-          Author: <span style={{ fontWeight: 600 }}>Prajwal Singla</span>
+        <Link to={`/?username=${post.username}`} className={classes.link}>
+          <Typography>
+            Author: <span style={{ fontWeight: 600 }}>{post.username}</span>
+          </Typography>
+        </Link>
+        <Typography style={{ marginLeft: 'auto' }}>
+          {new Date(post.createdDate).toDateString()}
         </Typography>
-        <Typography style={{ marginLeft: 'auto' }}>29 June, 2021</Typography>
       </Box>
-      <Typography>
-        This is a blog from Prajwal Singla.This is a blog from Prajwal
-        Singla.This is a blog from Prajwal Singla.This is a blog from Prajwal
-        Singla.This is a blog from Prajwal Singla.This is a blog from Prajwal
-        Singla.This is a blog from Prajwal Singla.This is a blog from Prajwal
-        Singla.
-      </Typography>
+      <Typography>{post.description}</Typography>
     </Box>
   )
 }

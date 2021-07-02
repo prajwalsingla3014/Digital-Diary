@@ -24,7 +24,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  createdData: {
+  createdDate: {
     type: Date,
   },
 })
