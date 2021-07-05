@@ -31,11 +31,13 @@ const useStyles = makeStyles({
     fontSize: 18,
     fontWeight: 600,
     fontFamily: 'Acme, sans-serif',
+    textAlign: 'center',
   },
   detail: {
     fontSize: 14,
     wordBreak: 'break-word',
     fontFamily: 'Noto Sans HK, sans-serif',
+    textAlign: 'center',
   },
 })
 
