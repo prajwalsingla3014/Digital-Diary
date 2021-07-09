@@ -14,7 +14,6 @@ const Posts = () => {
   useEffect(() => {
     const fetchData = async () => {
       let data = await getAllPosts(search)
-      console.log(data)
 
       setPosts(data)
     }
@@ -22,7 +21,7 @@ const Posts = () => {
   }, [search])
 
   return posts.map((post) => (
-    <Grid item xs={12} sm={4} lg={3}>
+    <Grid item xs={12} sm={6} lg={3}>
       <Link
         to={`/details/${post._id}`}
         style={{ textDecoration: 'none', color: 'inherit' }}

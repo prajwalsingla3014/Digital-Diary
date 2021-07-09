@@ -3,7 +3,7 @@
 import { Box, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     height: 350,
     margin: '10px 10px 10px 20px',
@@ -14,6 +14,9 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     '& > *': {
       padding: '0 5px 5px 5px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      margin: '10px 10px 10px 10px',
     },
   },
   image: {
@@ -39,7 +42,7 @@ const useStyles = makeStyles({
     fontFamily: 'Noto Sans HK, sans-serif',
     textAlign: 'center',
   },
-})
+}))
 
 const Post = ({ post }) => {
   const classes = useStyles()
@@ -49,7 +52,9 @@ const Post = ({ post }) => {
   return (
     <Box className={classes.container}>
       <img className={classes.image} src={url} alt="wrapper" />
-      <Typography className={classes.text}>{post.categories}</Typography>
+      <Typography className={classes.text}>
+        Category: {post.categories}
+      </Typography>
       <Typography className={classes.heading}>{post.title}</Typography>
       <Typography className={classes.text}>Author: {post.username}</Typography>
       <Typography className={classes.detail}>{post.description}</Typography>

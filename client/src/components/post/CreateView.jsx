@@ -7,11 +7,16 @@ import {
   FormControl,
   Button,
   TextareaAutosize,
+  Typography,
+  Select,
+  MenuItem,
 } from '@material-ui/core'
 import { AddCircle } from '@material-ui/icons'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { createPost, uploadFile } from '../../service/api'
 import { useHistory } from 'react-router-dom'
+import { items } from '../../constants/data'
+import { LoginContext } from '../../context/ContextProvider'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -19,21 +24,35 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('md')]: {
       padding: 0,
     },
+    [theme.breakpoints.down('xs')]: {
+      padding: '10px',
+    },
   },
   image: {
     width: '100%',
     height: '50vh',
     objectFit: 'cover',
+    [theme.breakpoints.down('xs')]: {
+      height: '35vh',
+      width: '100%',
+    },
   },
   form: {
     display: 'flex',
     flexDirection: 'row',
     marginTop: 10,
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: 10,
+    },
   },
   textfield: {
     flex: 1,
     margin: '0 30px',
     fontSize: 25,
+    [theme.breakpoints.down('xs')]: {
+      margin: '0 10px',
+      fontSize: 20,
+    },
   },
   textarea: {
     width: '100%',
@@ -44,24 +63,43 @@ const useStyles = makeStyles((theme) => ({
       outline: 'none',
     },
   },
+  publishbtn: {
+    [theme.breakpoints.down('xs')]: {
+      width: 80,
+      marginRight: 10,
+    },
+  },
+  categoryfield: {
+    marginTop: 15,
+    width: '15%',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+    },
+  },
 }))
-
-const initialValues = {
-  title: '',
-  description: '',
-  picture: '',
-  username: 'prajwalsingla',
-  categories: 'All',
-  createdDate: new Date(),
-}
 
 const CreateView = () => {
   const classes = useStyles()
   const history = useHistory()
 
-  const [post, setPost] = useState(initialValues)
+  // eslint-disable-next-line
+  const { account, setAccount } = useContext(LoginContext)
+
   const [file, setFile] = useState('')
+
+  // eslint-disable-next-line
   const [image, setImage] = useState('')
+
+  const initialValues = {
+    title: '',
+    description: '',
+    picture: '',
+    username: account,
+    categories: '',
+    createdDate: new Date(),
+  }
+
+  const [post, setPost] = useState(initialValues)
 
   const url = post.picture
     ? post.picture
@@ -89,6 +127,7 @@ const CreateView = () => {
       }
     }
     getImage()
+    // eslint-disable-next-line
   }, [file])
 
   return (
@@ -110,17 +149,39 @@ const CreateView = () => {
           name="title"
           className={classes.textfield}
         />
-        <Button onClick={() => savePost()} variant="contained" color="primary">
+        <Button
+          className={classes.publishbtn}
+          onClick={() => savePost()}
+          variant="contained"
+          color="primary"
+        >
           Publish
         </Button>
       </FormControl>
-      <TextareaAutosize
-        rowsMin={5}
-        name="description"
-        onChange={(e) => handleChange(e)}
-        placeholder="Tell your story ..."
-        className={classes.textarea}
-      />
+      <Box>
+        <Typography variant="h6" style={{ color: '#A7A7A7', marginTop: 10 }}>
+          Select Category
+        </Typography>
+        <Select
+          className={classes.categoryfield}
+          variant="outlined"
+          name="categories"
+          defaultValue="Music"
+          onChange={(e) => handleChange(e)}
+          label="Category"
+        >
+          {items.map((category) => (
+            <MenuItem value={category}>{category}</MenuItem>
+          ))}
+        </Select>
+        <TextareaAutosize
+          rowsMin={5}
+          name="description"
+          onChange={(e) => handleChange(e)}
+          placeholder="Tell your story ..."
+          className={classes.textarea}
+        />
+      </Box>
     </Box>
   )
 }

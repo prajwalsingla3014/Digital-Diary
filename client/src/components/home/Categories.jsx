@@ -10,10 +10,10 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core'
-import { categories } from '../../constants/data'
+import { items } from '../../constants/data'
 import { Link } from 'react-router-dom'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   create: {
     margin: 20,
     background: '#41B6F9',
@@ -25,13 +25,17 @@ const useStyles = makeStyles({
   },
   table: {
     border: '1px solid rgba(224,224,224,1)',
-    marginLeft: 10,
+    margin: '0 10px 0 10px',
+    [theme.breakpoints.down('xs')]: {
+      margin: 0,
+      width: '100%',
+    },
   },
   link: {
     textDecoration: 'none',
     color: 'inherit',
   },
-})
+}))
 
 const Categories = () => {
   const classes = useStyles()
@@ -53,7 +57,7 @@ const Categories = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {categories.map((category) => (
+          {items.map((category) => (
             <TableRow>
               <TableCell>
                 <Link to={`/?category=${category}`} className={classes.link}>

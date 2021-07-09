@@ -5,9 +5,10 @@ import React from 'react'
 
 const useStyles = makeStyles({
   image: {
-    background: `url(${'https://images.pexels.com/photos/414548/pexels-photo-414548.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'}) center/35% repeat-x #000`,
+    background: `url(${'https://www.wallpapertip.com/wmimgs/23-236943_us-wallpaper-for-website.jpg'})`,
     width: '100%',
     height: '50vh',
+    objectFit: 'cover',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
       lineHeight: 1,
     },
     '& :last-child': {
-      fontSize: 38,
+      fontSize: 40,
       fontFamily: 'Great Vibes, cursive',
       color: '#FFFFFF',
     },

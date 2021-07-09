@@ -10,8 +10,12 @@ import {
 } from '../controller/postController.js'
 import { getImage, uploadImage } from '../controller/imageController.js'
 import upload from '../utils/upload.js'
+import { userLogIn, userSignUp } from '../controller/userController.js'
 
 const router = express.Router()
+
+router.post('/signup', userSignUp)
+router.post('/login', userLogIn)
 
 router.post('/create', createPost)
 

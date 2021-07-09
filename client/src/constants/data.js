@@ -1,6 +1,6 @@
 /** @format */
 
-export const categories = [
+export const items = [
   'Music',
   'Movies',
   'Sports',
