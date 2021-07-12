@@ -49,15 +49,20 @@ const Post = ({ post }) => {
   const url =
     post.picture ||
     'https://images.pexels.com/photos/2148217/pexels-photo-2148217.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+
+  const shortenText = (str,limit) => {
+    return str.length > limit ? str.substring(0,limit) + "..." : str
+  }
+
   return (
     <Box className={classes.container}>
       <img className={classes.image} src={url} alt="wrapper" />
       <Typography className={classes.text}>
         Category: {post.categories}
       </Typography>
-      <Typography className={classes.heading}>{post.title}</Typography>
+      <Typography className={classes.heading}>{shortenText(post.title,30)}</Typography>
       <Typography className={classes.text}>Author: {post.username}</Typography>
-      <Typography className={classes.detail}>{post.description}</Typography>
+      <Typography className={classes.detail}>{shortenText(post.description,100)}</Typography>
     </Box>
   )
 }

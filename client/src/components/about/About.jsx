@@ -1,5 +1,6 @@
 /** @format */
 
+import React from 'react'
 import { Box, makeStyles, Typography, Link } from '@material-ui/core'
 import { GitHub, LinkedIn, Email } from '@material-ui/icons'
 
@@ -14,11 +15,12 @@ const useStyles = makeStyles({
   wrapper: {
     padding: 20,
     '& > *': {
-      marginTop: 50,
+      marginTop: 10,
     },
   },
   text: {
     color: '#878787',
+    fontFamily: 'Noto Sans HK, sans-serif',
   },
 })
 
@@ -28,10 +30,10 @@ const About = () => {
     <Box>
       <Box className={classes.banner}></Box>
       <Box className={classes.wrapper}>
-        <Typography variant="h3">Prajwal Singla</Typography>
+        <Typography variant="h3" style={{fontFamily: 'Acme, sans-serif'}}>Prajwal Singla</Typography>
         <Typography variant="h5" className={classes.text}>
-          I'm a Software Engineer based in India. I've built websites, desktop
-          applications and corporate software.
+          I'm a Software Engineer based in India. I've built websites, web
+          applications and a knack to explore various tech
           <br />
           If you are interested, you can view some of my favorite projects here
           <Box component="span" style={{ marginLeft: 5 }}>
@@ -45,7 +47,7 @@ const About = () => {
           </Box>
         </Typography>
         <Typography variant="h5" className={classes.text}>
-          Need something built or simply want to have chat? Reach out to me on
+          Need something built or want to have chat? Reach out to me on
           <Link
             href="https://www.linkedin.com/in/prajwalsingla3014/"
             color="inherit"

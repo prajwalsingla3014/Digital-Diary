@@ -65,9 +65,9 @@ const Header = () => {
             ABOUT
           </Typography>
         </Link>
-        <Link className={classes.link} to="/contact">
+        <Link className={classes.link} to="/create">
           <Typography style={{ fontFamily: 'Noto Sans HK, sans-serif' }}>
-            CONTACT
+            WRITE
           </Typography>
         </Link>
         {account ? (
