@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: 38,
     fontWeight: 600,
+    fontFamily: 'Acme, sans-serif',
     textAlign: 'center',
     margin: '50px 0 10px 0',
     [theme.breakpoints.down('xs')]: {
@@ -112,7 +113,14 @@ const DetailView = ({ match }) => {
           {new Date(post.createdDate).toDateString()}
         </Typography>
       </Box>
-      <Typography>{post.description}</Typography>
+      <Typography
+        style={{ marginBottom: 10, fontFamily: 'Noto Sans HK, sans-serif' }}
+      >
+        Category: {post.categories}
+      </Typography>
+      <Typography style={{ fontFamily: 'Noto Sans HK, sans-serif' }}>
+        {post.description}
+      </Typography>
     </Box>
   )
 }

@@ -92,7 +92,10 @@ const AuthDialog = ({ open, setOpen, setAccount }) => {
     else {
       showError(false)
       handleClose()
-      setAccount(login.username)
+      localStorage.setItem('userInfo', JSON.stringify(login.username))
+      const user = localStorage.getItem('userInfo')
+      const userinfo = JSON.parse(user)
+      setAccount(userinfo)
     }
   }
 
@@ -100,7 +103,10 @@ const AuthDialog = ({ open, setOpen, setAccount }) => {
     let response = await authenticateSignup(signup)
     if (!response) return
     handleClose()
-    setAccount(signup.username)
+    localStorage.setItem('userInfo', JSON.stringify(signup.username))
+    const user = localStorage.getItem('userInfo')
+    const userinfo = JSON.parse(user)
+    setAccount(userinfo)
   }
 
   const handleClose = () => {
